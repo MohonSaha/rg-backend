@@ -97,6 +97,43 @@ const updateUser = catchAsync(async (req, res) => {
   });
 });
 
+const requestOtp = catchAsync(async (req, res) => {
+  const { phone } = req.body;
+  const result = await UserServices.requestOtp(phone);
+
+  sendResponse(res, {
+    statusCode: 200,
+    message: result.message,
+    data: {
+      phone: result.phone,
+      otp: result.otp, // only returned if dummy key
+      isRegistered: result.isRegistered,
+    },
+  });
+});
+
+const verifyOtp = catchAsync(async (req, res) => {
+  const { phone, otp, full_name } = req.body;
+  const { user, isNewUser } = await UserServices.verifyOtp(phone, otp, full_name);
+  
+  const token = generateToken({
+    userId: user._id,
+    email: user.email || "",
+    role: user.role,
+  });
+
+  sendResponse(res, {
+    statusCode: 200,
+    message: isNewUser ? "User registered and logged in successfully" : "User logged in successfully",
+    data: {
+      user: user.toPublicJSON(),
+      token,
+      expiresAt: getExpiryMs(token),
+      isNewUser,
+    },
+  });
+});
+
 export const UserControllers = {
   registerUser,
   createManager,
@@ -105,4 +142,6 @@ export const UserControllers = {
   loginUser,
   getAllUsers,
   updateUser,
+  requestOtp,
+  verifyOtp,
 };

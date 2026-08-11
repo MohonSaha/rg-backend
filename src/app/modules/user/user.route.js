@@ -35,6 +35,16 @@ router.post(
   UserControllers.loginUser
 );
 
+router.post(
+  "/request-otp",
+  UserControllers.requestOtp
+);
+
+router.post(
+  "/verify-otp",
+  UserControllers.verifyOtp
+);
+
 router.get("/", UserControllers.getAllUsers);
 
 router.patch(

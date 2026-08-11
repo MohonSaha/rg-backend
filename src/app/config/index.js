@@ -9,6 +9,7 @@ export default {
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN,
   clientUrl: process.env.CLIENT_URL,
+  alphaSmsApiKey: process.env.ALPHA_SMS_API_KEY || "dummy_key_until_configured",
   twilio: {
     accountSid: process.env.TWILIO_ACCOUNT_SID,
     authToken: process.env.TWILIO_AUTH_TOKEN,
