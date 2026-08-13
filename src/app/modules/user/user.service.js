@@ -190,6 +190,17 @@ const verifyOtp = async (phone, otpCode, full_name) => {
   };
 };
 
+const getUserByPhone = async (phone) => {
+  const user = await User.findOne({ 
+    $or: [{ phone }, { whatsapp_number: phone }],
+    is_deleted: { $ne: true } 
+  });
+  if (!user) {
+    throw new Error("User profile not found");
+  }
+  return user.toPublicJSON();
+};
+
 export const UserServices = {
   register,
   createManager,
@@ -200,4 +211,5 @@ export const UserServices = {
   updateUser,
   requestOtp,
   verifyOtp,
+  getUserByPhone,
 };

@@ -134,6 +134,17 @@ const verifyOtp = catchAsync(async (req, res) => {
   });
 });
 
+const getUserByPhone = catchAsync(async (req, res) => {
+  const { phone } = req.params;
+  const user = await UserServices.getUserByPhone(phone);
+
+  sendResponse(res, {
+    statusCode: 200,
+    message: "User profile retrieved successfully",
+    data: user,
+  });
+});
+
 export const UserControllers = {
   registerUser,
   createManager,
@@ -144,4 +155,5 @@ export const UserControllers = {
   updateUser,
   requestOtp,
   verifyOtp,
+  getUserByPhone,
 };

@@ -46,6 +46,7 @@ router.post(
 );
 
 router.get("/", UserControllers.getAllUsers);
+router.get("/phone/:phone", UserControllers.getUserByPhone);
 
 router.patch(
   "/:id",
