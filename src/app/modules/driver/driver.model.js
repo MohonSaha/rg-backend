@@ -71,16 +71,6 @@ const driverSchema = new mongoose.Schema(
       min: 0,
     },
 
-    intercity_experience_years: {
-      type: Number,
-      required: false,
-      min: 0,
-    },
-
-    preferred_routes: {
-      type: [String],
-      default: [],
-    },
 
     // ================================
     // IDENTITY VERIFICATION
@@ -219,46 +209,12 @@ const driverSchema = new mongoose.Schema(
         required: false,
       },
 
-      owner_nid: {
-        type: String,
-        required: false,
-      },
 
       // ----------------------------
       // Vehicle Documents
       // ----------------------------
       registration_document: {
         type: String,
-        required: false,
-      },
-
-      tax_token: {
-        type: String,
-        required: false,
-      },
-
-      tax_token_expiry_date: {
-        type: Date,
-        required: false,
-      },
-
-      fitness_certificate: {
-        type: String,
-        required: false,
-      },
-
-      fitness_expiry_date: {
-        type: Date,
-        required: false,
-      },
-
-      insurance_document: {
-        type: String,
-        required: false,
-      },
-
-      insurance_expiry_date: {
-        type: Date,
         required: false,
       },
 
